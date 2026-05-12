@@ -53,6 +53,34 @@ const controller = {
 
   // PUT /api/playlists/:id
 
+    addMusic: (req, res) => {
+    const { title, year, artist, album } = req.body
+    const { id } = req.params
+
+    const playlist = playlists.find(pl => pl.id === +id)
+
+    if (!playlist) return res.status(404).json({ message: 'playlist not found' })
+
+    if (
+      typeof title !== 'string' || typeof year !== 'number' ||
+      typeof artist !== 'string' || typeof album !== 'string'
+    ) {
+      return res.status(400).json({ message: 'invalid fields' })
+    }
+
+    const newMusic = {
+      id: generateRandomID(),
+      title,
+      year,
+      artist,
+      album
+    }
+
+    playlist.musics.push(newMusic)
+
+    res.status(201).json(newMusic)
+  },
+
    // PUT /api/playlists/:id
   update: (req, res) => {
     const { id } = req.params
