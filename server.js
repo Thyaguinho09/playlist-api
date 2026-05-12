@@ -5,5 +5,14 @@ const app = express ();
 app.use (express.json ());
 
 app.use ('/api/playlists', playlistsRouter);
+
 const PORT = 3000;
-app.listen (PORT, () => console.log ('Servidor iniciado!'));
+
+app.listen (PORT, () => {
+  console.log (`Servidor rodando na porta ${PORT}`);
+});
+
+// {
+//   "name": "Rock",
+//   "tags": ["rock", "metal"]
+// }
